@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    network_mode: service:mysql
+    environment:
+      PMA_HOST: 127.0.0.1
+      PMA_USER: root
+      PMA_PASSWORD: ""
+    depends_on:
+      - mysql
+
+  app:
+    image: mcr.microsoft.com/devcontainers/javascript-node:20
+    network_mode: service:mysql
+    volumes:
+      - ..:/workspaces/store-backend:cached
+    command: sleep infinity
+
+volumes:
+  dbdata:

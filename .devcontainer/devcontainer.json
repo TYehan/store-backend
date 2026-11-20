@@ -1,0 +1,15 @@
+{
+  "name": "store-backend",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/store-backend",
+  "forwardPorts": [80, 3000],
+  "portsAttributes": {
+    "80": { "label": "phpMyAdmin", "onAutoForward": "openBrowser" },
+    "3000": { "label": "Node API" }
+  },
+  "postCreateCommand": "npm init -y && npm install express mysql2",
+  "customizations": {
+    "vscode": { "extensions": ["rangav.vscode-thunder-client"] }
+  }
+}
